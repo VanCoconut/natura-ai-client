@@ -9,25 +9,16 @@ export default function LoginPage({ setUser }) {
         e.preventDefault();
         try {
             let user;
-            if (isRegister) {
-                const res = await fetch('https://natura-ai-server.ing-v-catalano.workers.dev', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error);
-                user = data.user;
-            } else {
-                const res = await fetch('https://natura-ai-server.ing-v-catalano.workers.dev', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error);
-                user = data.user;
-            }
+            const endpoint = isRegister ? "register" : "login"; // scegli endpoint
+            const res = await fetch(`https://natura-ai-server.ing-v-catalano.workers.dev/${endpoint}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error);
+            user = data.user;
 
             setUser(user); // salva utente nello stato di App.jsx
         } catch (err) {
