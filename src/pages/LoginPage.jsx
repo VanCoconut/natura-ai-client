@@ -10,7 +10,7 @@ export default function LoginPage({ setUser }) {
         try {
             let user;
             if (isRegister) {
-                const res = await fetch('http://localhost:8787/register', {
+                const res = await fetch('https://natura-ai-server.ing-v-catalano.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
@@ -19,7 +19,7 @@ export default function LoginPage({ setUser }) {
                 if (!res.ok) throw new Error(data.error);
                 user = data.user;
             } else {
-                const res = await fetch('http://localhost:8787/login', {
+                const res = await fetch('https://natura-ai-server.ing-v-catalano.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })

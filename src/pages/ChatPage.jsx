@@ -12,7 +12,7 @@ export default function ChatPage({ user, setUser }) {
         setMessages([...messages, { sender: "user", text: input }]);
 
         try {
-            const res = await fetch('http://localhost:8787/chat', {
+            const res = await fetch('https://natura-ai-server.ing-v-catalano.workers.dev', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: user.username, message: input })
